@@ -18,6 +18,7 @@
 <body>
 
 <h1 id="title">Welcome to Human Memory Experiment.</h1>
+<h2 id="info">METU COGS 551 Human Memory - 2018 Spring</h2>
 
 <button onclick="start()" id="button">start experiment</button>
 
@@ -68,10 +69,11 @@
 		function start() {
 			document.getElementById("title").innerHTML = "";
 			document.getElementById("button").remove();
+			document.getElementById("info").remove();
 
 			function removeAndWait(i) {
 				if (i >= 20) {
-					document.getElementById("title").innerHTML = ".....";	
+					document.getElementById("title").innerHTML = "....finished....";	
 				} else {
 					document.getElementById("title").innerHTML = "&#8226;";
 					setTimeout(put, 1000, i);
