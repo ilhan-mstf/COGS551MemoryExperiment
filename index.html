@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Human Memory Experiment</title>
+
+  <style type="text/css">
+  	#title {
+  		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translateX(-50%) translateY(-50%);
+	    font-size: 2.3em;
+  	}
+  </style>
+
+</head>
+<body>
+
+<h1 id="title">Welcome to Human Memory Experiment.</h1>
+
+<button onclick="start()" id="button">start experiment</button>
+
+<script type="text/javascript">
+
+	function unique(arr) {
+		var u = {}, a = [];
+    	for(var i = 0, l = arr.length; i < l; ++i){
+        	if(!u.hasOwnProperty(arr[i])) {
+            	a.push(arr[i].toLowerCase());
+            	u[arr[i]] = 1;
+        	}
+    	}
+    	return a;
+	}
+
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+
+  		// While there remain elements to shuffle...
+  		while (0 !== currentIndex) {
+
+    		// Pick a remaining element...
+    		randomIndex = Math.floor(Math.random() * currentIndex);
+    		currentIndex -= 1;
+
+    		// And swap it with the current element.
+    		temporaryValue = array[currentIndex];
+    		array[currentIndex] = array[randomIndex];
+    		array[randomIndex] = temporaryValue;
+  		}
+
+  		return array;
+	}
+
+ 	var a = ["Kitap", "Kalem", "Karpuz", "Silgi", "Okul", "Araba", "Tekne", "Ayakkabı", "Resim", "Fırça", "Şemsiye", "Tahta", "Rüzgar", "Gemi", "Cüzdan", "Kahve", "Çekiç", "Gezgin", "Elma", "Erik", "Hüzün", "Karpuz", "Üzüm", "Hasta", "Doktor", "Ranza", "Yatak", "Bıçak", "Çatal", "Kaşık", "Uzun", "Kısa", "Kutu", "Deniz", "Toprak", "Çiçek", "Ağaç", "Tabak", "Çanak", "Fırın", "Dolap", "Çorap", "Halı", "terlik", "sandalet", "dolap", "kapak", "tencere", "sandalye", "bardak", "parmak", "yüzük", "tekerlek", "leğen", "ayna", "tarak", "kapı", "kilit", "anahtar", "keçe", "kağıt", "kutu", "kapak", "tepsi", "sürahi", "kavanoz", "porselen", "poşet", "kedi", "köpek", "ağaç", "Paket", "zaman", "yatırım", "yabancı", "vücut", "şapka", "şahin", "sirk", "sihirbaz", "savunma", "sanayi", "saat", "ray", "patika", "ofis", "mantar", "malzeme", "mahremiyet", "madde", "maç", "kreş", "kaya", "karayolu", "içerik", "ıslık", "harf", "haber", "gökdelen", "gelenek", "fırın", "etki", "el", "doktor", "demir", "davranış", "cinsiyet", "ciddiyet", "cadde", "boya", "asansör", "alet", "zevk", "zarafet", "yıldız", "yelkenli", "yazar", "tebrik", "tatlı", "şirinlik", "şelale", "şarap", "sinema", "sarılma", "renk", "ödül", "neşe", "melek", "kucak", "konsantre", "kitap", "ilgi", "içecek", "güzellik", "günbatımı", "gündoğumu", "gülümseme", "gökkuşağı", "gemi", "fener", "duygu", "dostluk", "doğa", "dergi", "çimen", "çarşı", "civciv", "ayrıntı", "ay", "ampül", "altın", "ağırlama", "Mandalina", "Elma", "Üzüm", "Erik", "Saksı", "Çiçek", "Karanfil", "Gül", "Güneş", "Deniz", "Tekne", "Simit", "Çay", "Peynir", "Yumurta", "Biber", "Pekmez", "Helva", "Bal", "Reçel", "Kaymak", "Yağ", "Ekmek", "Çörek", "Kek", "Omlet", "Kutu", "Kasa", "Kablo", "Meze", "Armut", "Maydanoz", "Kekik", "Yaprak", "Beyaz", "Sarı", "Mavi", "Yeşil", "Heykel", "Torba", "Poşet", "Yağmur", "Toprak", "Rüzgar", "Kamyon", "Gül", "Araba", "Kapak", "Mercek", "Gözlük", "Gözleme", "Gömü", "Havuç", "Lahana", "Nane", "Ot", "Buz", "Su", "Yol", "Top", "Perde", "Koltuk", "Halı", "Tuş", "Kukla", "Göz", "Mürekkep", "Pompo", "Torba", "Çatal", "Aşık", "Kepçe", "Dolap", "Fırın", "Ocak", "Musluk", "Maden", "Bakır", "Demir", "Cam", "Balkon", "Bina", "Sıra", "Saat", "Yüzük", "Yün", "Koyun", "Keçi", "Kedi", "Köpek", "Ceviz", "Fındık", "Fıstık", "Badem", "Kayısı", "Çilek", "Şeftali", "Marul", "Portakal", "çilek", "dere", "nehir", "göl", "ırmak", "yağ", "zeytin", "incir"]
+
+		var b = shuffle(unique(a));
+
+		for (var i = 0, ii = b.length; i != ii; i++) {
+			console.log(b[i]);
+		}
+
+		var group1 = b.slice(0,20);
+		var group2 = [];
+		var group3 = [];
+
+		function start() {
+			document.getElementById("title").innerHTML = "";
+			document.getElementById("button").remove();
+
+			function removeAndWait(i) {
+				if (i >= 20) {
+					document.getElementById("title").innerHTML = ".....";	
+				} else {
+					document.getElementById("title").innerHTML = "&#8226;";
+					setTimeout(put, 1000, i);
+				}
+			}
+
+			function put(i) {
+				document.getElementById("title").innerHTML = group1[i];
+				setTimeout(removeAndWait, 1000, ++i);
+			}
+			
+			setTimeout(removeAndWait, 1000, 0);
+		}
+
+</script>
+
+</body>
+</html>
