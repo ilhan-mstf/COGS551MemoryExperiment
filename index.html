@@ -12,27 +12,29 @@
 	    transform: translateX(-50%) translateY(-50%);
 	    font-size: 2.3em;
   	}
+  	button {
+  		font-size: 16px;
+  	}
   </style>
 
 </head>
 <body>
 
-<h1 id="title">Welcome to Human Memory Experiment.</h1>
+<h1 id="title">Welcome to Human Memory Experiment</h1>
 <h2 id="info">METU COGS 551 Human Memory - 2018 Spring</h2>
+<p id="exp">Please select the group. Make sure that you have distributed to subjects paper and pencil.</p>
 
-<button onclick="start()" id="button">start experiment</button>
+<button onclick="start(0)" id="button1">Start Experiment - Group1</button>
+<br/><br/>
+<button onclick="start(3)" id="button2">Start Experiment - Group2</button>
+<br/><br/>
+<button onclick="start(6)" id="button3">Start Experiment - Group3</button>
 
 <script type="text/javascript">
 
-	function unique(arr) {
-		var u = {}, a = [];
-    	for(var i = 0, l = arr.length; i < l; ++i){
-        	if(!u.hasOwnProperty(arr[i])) {
-            	a.push(arr[i].toLowerCase());
-            	u[arr[i]] = 1;
-        	}
-    	}
-    	return a;
+/*
+	function onlyUnique(value, index, self) { 
+	    return self.indexOf(value) === index;
 	}
 
 	function shuffle(array) {
@@ -54,38 +56,68 @@
   		return array;
 	}
 
- 	var a = ["Kitap", "Kalem", "Karpuz", "Silgi", "Okul", "Araba", "Tekne", "Ayakkabı", "Resim", "Fırça", "Şemsiye", "Tahta", "Rüzgar", "Gemi", "Cüzdan", "Kahve", "Çekiç", "Gezgin", "Elma", "Erik", "Hüzün", "Karpuz", "Üzüm", "Hasta", "Doktor", "Ranza", "Yatak", "Bıçak", "Çatal", "Kaşık", "Uzun", "Kısa", "Kutu", "Deniz", "Toprak", "Çiçek", "Ağaç", "Tabak", "Çanak", "Fırın", "Dolap", "Çorap", "Halı", "terlik", "sandalet", "dolap", "kapak", "tencere", "sandalye", "bardak", "parmak", "yüzük", "tekerlek", "leğen", "ayna", "tarak", "kapı", "kilit", "anahtar", "keçe", "kağıt", "kutu", "kapak", "tepsi", "sürahi", "kavanoz", "porselen", "poşet", "kedi", "köpek", "ağaç", "Paket", "zaman", "yatırım", "yabancı", "vücut", "şapka", "şahin", "sirk", "sihirbaz", "savunma", "sanayi", "saat", "ray", "patika", "ofis", "mantar", "malzeme", "mahremiyet", "madde", "maç", "kreş", "kaya", "karayolu", "içerik", "ıslık", "harf", "haber", "gökdelen", "gelenek", "fırın", "etki", "el", "doktor", "demir", "davranış", "cinsiyet", "ciddiyet", "cadde", "boya", "asansör", "alet", "zevk", "zarafet", "yıldız", "yelkenli", "yazar", "tebrik", "tatlı", "şirinlik", "şelale", "şarap", "sinema", "sarılma", "renk", "ödül", "neşe", "melek", "kucak", "konsantre", "kitap", "ilgi", "içecek", "güzellik", "günbatımı", "gündoğumu", "gülümseme", "gökkuşağı", "gemi", "fener", "duygu", "dostluk", "doğa", "dergi", "çimen", "çarşı", "civciv", "ayrıntı", "ay", "ampül", "altın", "ağırlama", "Mandalina", "Elma", "Üzüm", "Erik", "Saksı", "Çiçek", "Karanfil", "Gül", "Güneş", "Deniz", "Tekne", "Simit", "Çay", "Peynir", "Yumurta", "Biber", "Pekmez", "Helva", "Bal", "Reçel", "Kaymak", "Yağ", "Ekmek", "Çörek", "Kek", "Omlet", "Kutu", "Kasa", "Kablo", "Meze", "Armut", "Maydanoz", "Kekik", "Yaprak", "Beyaz", "Sarı", "Mavi", "Yeşil", "Heykel", "Torba", "Poşet", "Yağmur", "Toprak", "Rüzgar", "Kamyon", "Gül", "Araba", "Kapak", "Mercek", "Gözlük", "Gözleme", "Gömü", "Havuç", "Lahana", "Nane", "Ot", "Buz", "Su", "Yol", "Top", "Perde", "Koltuk", "Halı", "Tuş", "Kukla", "Göz", "Mürekkep", "Pompo", "Torba", "Çatal", "Aşık", "Kepçe", "Dolap", "Fırın", "Ocak", "Musluk", "Maden", "Bakır", "Demir", "Cam", "Balkon", "Bina", "Sıra", "Saat", "Yüzük", "Yün", "Koyun", "Keçi", "Kedi", "Köpek", "Ceviz", "Fındık", "Fıstık", "Badem", "Kayısı", "Çilek", "Şeftali", "Marul", "Portakal", "çilek", "dere", "nehir", "göl", "ırmak", "yağ", "zeytin", "incir"]
+ 	var a = ["Kitap", "Kalem", "Karpuz", "Silgi", "Okul", "Araba", "Tekne", "Ayakkabı", "Resim", "Fırça", "Şemsiye", "Tahta", "Rüzgar", "Gemi", "Cüzdan", "Kahve", "Çekiç", "Gezgin", "Elma", "Erik", "Hüzün", "Karpuz", "Üzüm", "Hasta", "Doktor", "Ranza", "Yatak", "Bıçak", "Çatal", "Kaşık", "Uzun", "Kısa", "Kutu", "Deniz", "Toprak", "Çiçek", "Ağaç", "Tabak", "Çanak", "Fırın", "Dolap", "Çorap", "Halı", "terlik", "sandalet", "dolap", "kapak", "tencere", "sandalye", "bardak", "parmak", "yüzük", "tekerlek", "leğen", "ayna", "tarak", "kapı", "kilit", "anahtar", "keçe", "kağıt", "kutu", "kapak", "tepsi", "sürahi", "kavanoz", "porselen", "poşet", "kedi", "köpek", "ağaç", "Paket", "zaman", "yatırım", "yabancı", "vücut", "şapka", "şahin", "sirk", "sihirbaz", "savunma", "sanayi", "saat", "ray", "patika", "ofis", "mantar", "malzeme", "mahremiyet", "madde", "maç", "kreş", "kaya", "karayolu", "içerik", "ıslık", "harf", "haber", "gökdelen", "gelenek", "fırın", "etki", "el", "doktor", "demir", "davranış", "cinsiyet", "ciddiyet", "cadde", "boya", "asansör", "alet", "zevk", "zarafet", "yıldız", "yelkenli", "yazar", "tebrik", "tatlı", "şirinlik", "şelale", "şarap", "sinema", "sarılma", "renk", "ödül", "neşe", "melek", "kucak", "konsantre", "kitap", "ilgi", "içecek", "güzellik", "günbatımı", "gündoğumu", "gülümseme", "gökkuşağı", "gemi", "fener", "duygu", "dostluk", "doğa", "dergi", "çimen", "çarşı", "civciv", "ayrıntı", "ay", "ampül", "altın", "ağırlama", "Mandalina", "Elma", "Üzüm", "Erik", "Saksı", "Çiçek", "Karanfil", "Gül", "Güneş", "Deniz", "Tekne", "Simit", "Çay", "Peynir", "Yumurta", "Biber", "Pekmez", "Helva", "Bal", "Reçel", "Kaymak", "Yağ", "Ekmek", "Çörek", "Kek", "Omlet", "Kutu", "Kasa", "Kablo", "Meze", "Armut", "Maydanoz", "Kekik", "Yaprak", "Beyaz", "Sarı", "Mavi", "Yeşil", "Heykel", "Torba", "Poşet", "Yağmur", "Toprak", "Rüzgar", "Kamyon", "Gül", "Araba", "Kapak", "Mercek", "Gözlük", "Gözleme", "Gömü", "Havuç", "Lahana", "Nane", "Ot", "Buz", "Su", "Yol", "Top", "Perde", "Koltuk", "Halı", "Tuş", "Kukla", "Göz", "Mürekkep", "Pompo", "Torba", "Çatal", "Aşık", "Kepçe", "Dolap", "Fırın", "Ocak", "Musluk", "Maden", "Bakır", "Demir", "Cam", "Balkon", "Bina", "Sıra", "Saat", "Yüzük", "Yün", "Koyun", "Keçi", "Kedi", "Köpek", "Ceviz", "Fındık", "Fıstık", "Badem", "Kayısı", "Çilek", "Şeftali", "Marul", "Portakal", "çilek", "dere", "nehir", "göl", "ırmak", "yağ", "zeytin", "incir", "yastık"]
 
-		var b = shuffle(unique(a));
+		var b = shuffle(a.map(a => a.toLowerCase()).filter( onlyUnique ));
 
 		for (var i = 0, ii = b.length; i != ii; i++) {
 			console.log(b[i]);
 		}
+*/
+		var groups = [
+				["poşet", "tatlı", "demir", "fırça", "bina", "mercek", "karpuz", "gözleme", "anahtar", "koltuk", "balkon", "tencere", "çörek", "dergi", "maden", "altın", "zaman", "göz", "fıstık", "mantar"], 
+				["cam", "ağaç", "ekmek", "erik", "boya", "civciv", "dostluk", "fener", "maç", "kapak", "ot", "incir", "ranza", "sürahi", "gezgin", "yaprak", "halı", "yüzük", "bardak", "neşe"], 
+				["sarı", "yol", "yatak", "pompo", "ırmak", "mavi", "havuç", "çiçek", "çay", "şemsiye", "zeytin", "simit", "bal", "yün", "çilek", "şelale", "kutu", "dolap", "şapka", "alet"],
+				/* group 2 */
+				["gülmek", "sirk", "gömü", "torba", "su", "renk", "nane", "doğa", "gül", "kısa", "beyaz", "kitap", "kilit", "etki", "uzun", "kamyon", "patika", "peynir", "tabak", "yatırım"],
+				["saksı", "gözlük", "armut", "gemi", "vücut", "musluk", "fırın", "güneş", "çörek", "keçe", "kablo", "ampül", "göl", "şahin", "ray", "zevk", "koyun", "melek", "el", "kalem"],
+				["paket", "bakır", "çarşı", "kayısı", "kek", "gelenek", "kağıt", "cadde", "çanak", "doktor", "pekmez", "kapı", "leğen", "sıra", "sinema", "deniz", "yağmur", "ıslık", "harf", "toprak"],
+				/* group 3 */
+				["çimen", "perde", "içecek", "yıldız", "hasta", "silgi", "çatal", "kasa", "ay", "kaşık", "marul", "biber", "kukla", "aşık", "ödül", "araba", "tepsi", "yastık", "madde", "omlet"],
+				["fındık", "şeftali", "parmak", "duygu", "bıçak", "ayna", "kaymak", "üzüm", "köpek", "tuş", "buz", "nehir", "okul", "cüzdan", "saat", "dere", "helva", "top", "çekiç", "kahve"],
+				["kekik", "ocak", "resim", "tarak", "kucak", "keçi", "tebrik", "meze", "kaya", "kedi", "tahta", "çorap", "kepçe", "lahana", "ceviz", "haber", "yeşil", "şarap", "elma", "reçel"]
+			];
 
-		var group1 = b.slice(0,20);
-		var group2 = [];
-		var group3 = [];
-
-		function start() {
+		function start(group) {
 			document.getElementById("title").innerHTML = "";
-			document.getElementById("button").remove();
-			document.getElementById("info").remove();
+			document.getElementById("info").style.display = "none";
+			document.getElementById("exp").style.display = "none";
+			document.getElementById("button1").style.display = "none";
+			document.getElementById("button2").style.display = "none";
+			document.getElementById("button3").style.display = "none";
 
-			function removeAndWait(i) {
-				if (i >= 20) {
-					document.getElementById("title").innerHTML = "....finished....";	
+			function removeAndWait(group, trial, item) {
+				console.log(group + " " + trial + " " + item)
+				if (item >= 20) {
+					trial--;
+					if (trial == 0) {
+						document.getElementById("title").innerHTML = "....finished group" + group + "....";
+						setTimeout(goBackToInitialPage, 10000);
+					} else {
+						document.getElementById("title").innerHTML = "----";
+						setTimeout(removeAndWait, 60000, ++group, trial, 0);
+					}
 				} else {
 					document.getElementById("title").innerHTML = "&#8226;";
-					setTimeout(put, 1000, i);
+					setTimeout(put, 1000, group, trial, item);
 				}
 			}
 
-			function put(i) {
-				document.getElementById("title").innerHTML = group1[i];
-				setTimeout(removeAndWait, 1000, ++i);
+			function put(group, trial, item) {
+				document.getElementById("title").innerHTML = groups[group][item];
+				setTimeout(removeAndWait, 1000, group, trial, ++item);
 			}
 			
-			setTimeout(removeAndWait, 1000, 0);
+			setTimeout(removeAndWait, 1000, group, 3, 0);
+		}
+
+		function goBackToInitialPage() {
+			document.getElementById("title").innerHTML = "Welcome to Human Memory Experiment";
+			document.getElementById("info").style.display = "block";
+			document.getElementById("exp").style.display = "block";
+			document.getElementById("button1").style.display = "block";
+			document.getElementById("button2").style.display = "block";
+			document.getElementById("button3").style.display = "block";
 		}
 
 </script>
