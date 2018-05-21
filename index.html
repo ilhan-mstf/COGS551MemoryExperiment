@@ -97,7 +97,10 @@
 						setTimeout(goBackToInitialPage, 120000);
 					} else {
 						document.getElementById("title").innerHTML = "----";
-						setTimeout(removeAndWait, 120000, ++group, trial, 0);
+						setTimeout(function() {
+							document.getElementById("title").innerHTML = "&#8226;";
+							setTimeout(removeAndWait, 10000, ++group, trial, 0);
+						}, 110000);
 					}
 				} else {
 					document.getElementById("title").innerHTML = "&#8226;";
